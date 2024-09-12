@@ -20,8 +20,13 @@ This part is adapted from previous code available here: https://github.com/tcape
 * `ddpm_conditional_emb.py` contains the main training algorithm
 * `sampling.py` contains code to sample new images from an already trained model
 
-Command example to train a new model: `python ddpm_conditional_emb.py --mask 0 75 --embedding_type 'embpos'`
-Command example to sample new images: `python ddpm_conditional_emb.py --num_samples 15 --mask 0 75 --embedding_type 'embpos'`
+Command example to train a new model:
+
+`python ddpm_conditional_emb.py --mask 0 75 --embedding_type 'embpos'`
+
+Command example to sample new images: 
+
+`python ddpm_conditional_emb.py --num_samples 15 --mask 0 75 --embedding_type 'embpos'`
 
 ### Concept-Guided ProtoPNet
 
@@ -39,8 +44,13 @@ This part is adapted from previous code available here: https://github.com/cfche
 * `main.py` contains the main training algorithm
 * `prototype_dataset.py` allows to calculate the concept prototype dataset from a pre-trained model
 
-Command example to train a new model: `python main.py --base_architecture 'vgg16' --coefs_clst 0.8 --coefs_sep = -0.08 --coefs_l1 1e-4`
-Command example to create the concept prototype dataset: `python prototype_dataset.py --modeldir 'path_to_model_directory' --model 'model_name'`
+Command example to train a new model: 
+
+`python main.py --base_architecture 'vgg16' --coefs_clst 0.8 --coefs_sep = -0.08 --coefs_l1 1e-4`
+
+Command example to create the concept prototype dataset: 
+
+`python prototype_dataset.py --modeldir 'path_to_model_directory' --model 'model_name'`
 
 ### Concept-Guided ProtoPools
 
@@ -57,8 +67,13 @@ This part is adapted from previous code available here: https://github.com/gmum/
 * `main.py` contains the main training algorithm
 * `prototype_dataset.py` allows to calculate the concept prototype dataset from a pre-trained model
 
-Command example to train a new model: `python main.py --base_architecture 'vgg16' --clst_weight 0.8 --sep_weight = -0.08 --l1_weight 1e-4 --orth_p_weight 1 --orth_c_weight 1`
-Command example to create the concept prototype dataset: `python prototype_dataset.py --modeldir 'path_to_model_directory' --model 'model_name'`
+Command example to train a new model: 
+
+`python main.py --base_architecture 'vgg16' --clst_weight 0.8 --sep_weight = -0.08 --l1_weight 1e-4 --orth_p_weight 1 --orth_c_weight 1`
+
+Command example to create the concept prototype dataset: 
+
+`python prototype_dataset.py --modeldir 'path_to_model_directory' --model 'model_name'`
 
 ### Prototype Concept Bottleneck Models
 
@@ -77,4 +92,6 @@ This part is based on the previous two on CG-ProtoPNet and CG-ProtoPools to buil
 * `ProtoCBLoss.py` contains the method for the construction of the loss function
 * `main.py` contains the main training algorithm
  
-Command example to train a new model: `python main.py  --config config_file.yaml` (it is also possible to pass other parameters on top of the config file)
+Command example to train a new model: 
+
+`python main.py  --config config_file.yaml` (it is also possible to pass other parameters on top of the config file)
