@@ -1,0 +1,82 @@
+# --------------------------
+#         Experiment
+# --------------------------
+run_name: 'test'                                    # name of the experiment
+seed: 42                                            # random generator seed
+workers: 1                                          # number of worker processes
+model_dir: '.'                                      # directory with pretrained networks, s.a. ResNet-18
+save_dir: '.'                                       # directory to save the model
+pretrained_dir: '.'                                 # directory to load pretrained model from
+
+# --------------------------
+#         Dataset
+# --------------------------
+dataset: 'awa'                                      # name of the dataset
+data_path: '.'                                      # directory with the dataset
+num_classes: 50                                     # number of the classes of the target variable
+num_concepts: 85                                    # number of the concept variables
+img_aug: True                                       # perform image augmentation         
+img_size: 224                                       # image size            
+
+# --------------------------
+#         CBM Model
+# --------------------------
+encoder_arch: 'resnet18'                          # encoder architecture
+head_arch: 'linear'                               # linear or nonlinear classifier: 'linear' or 'nonlinear'
+training_mode: 'independent'                      # optimization methods for the CBM: 'sequential' or 'joint' or 'independent'
+alpha: 1.0                                        # weight for the joint training mode                       
+prototype_mode: 'cbm'                             # type of concept learning: 'cbm', 'ppnet', 'ppool'
+prototype_pretrained: False
+
+# --------------------------
+#        ProtoPNet
+#---------------------------
+prototype_shape: (1700, 128, 1, 1)                # (num_prototypes, prototype_depth, prototype_height, prototype_width)
+prototype_activation_function: 'log'              # prototype activation function: 'linear' or 'log'
+add_on_layers_type: 'log'                         # add-on layers activation function: 'linear' or 'log'
+num_warm_epochs: 5                                # number of warm-up epochs                 
+joint_optimizer_lrs_features: 1e-4                # learning rate for the features  
+joint_optimizer_lrs_add_on_layers: 3e-3           # learning rate for the add-on layers
+joint_optimizer_prototype_vectors: 3e-3           # learning rate for the prototype vectors
+joint_lr_step_size: 5                             # step size for the learning rate scheduler          
+warm_optimizer_lrs_add_on_layers: 3e-3            # learning rate for the add-on layers in the warm-up phase
+warm_optimizer_prototype_vectors: 3e-3            # learning rate for the prototype vectors in the warm-up phase
+last_layer_optimizer_lr: 1e-4                     # learning rate for the last layer
+coefs_crs_ent: 1                                  # coefficient for the cross-entropy loss
+coefs_clst: 0.8                                   # coefficient for the clustering loss (lambda_1)          
+coefs_sep: -0.08                                  # coefficient for the separation loss (lambda_2)
+coefs_l1: 1e-5                                    # coefficient for the L1 regularization (lambda_last)        
+push_start: 10                                    # epoch to start the pushing and prototype projection step 
+
+# ------------------------------------------------
+#        ProtoPool (those not already in PPNet)
+#-------------------------------------------------
+num_prototypes: 400                               # number of prototypes
+num_descriptive: 10                               # number of descriptive prototypes (slots)
+use_thresh: True                                  # use threshold      
+pretrained: True                                  # use pretrained model (ImageNet)
+proto_depth: 256                                  # prototype depth       
+last_layer: True                                  # use last layer    
+inat: False                                       # use iNaturalist           
+gumbel_time: 30                                   # number of epochs to decrease Gumbel-Softmax     
+warm_optimizer_proto_presence: 3e-3               # learning rate for the prototype presence in the warm-up phase
+joint_optimizer_proto_presence: 3e-3              # learning rate for the prototype presence
+coefs_ortho_p: 1                                  # coefficient for the orthogonal loss (lambda_3)
+coefs_ortho_c: 1                                  # coefficient for the orthogonal loss (lambda_4)
+
+# --------------------------
+#         Training
+# --------------------------
+c_epochs: 50                                     # number of training epochs in concept training (independent or sequential methods)
+t_epochs: 100                                    # number of training epochs in target training (independent or sequential methods))
+j_epochs: 200                                    # number of training epochs in the joint optimization
+validate_per_epoch: 5                            # periodicity to evaluate the model
+
+learning_rate: 0.0001                             # learning rate in the joint optimization
+optimizer: 'adam'                                 # optimizer: 'sgd' or 'adam'
+decrease_every: 150                               # frequency of the learning rate decrease
+lr_divisor: 2                                     # rate of the learning rate decrease
+weight_decay: 0                                   # weight decay
+
+train_batch_size: 64                              # batch size for the training set
+val_batch_size: 64                                # batch size for the validation and test sets
